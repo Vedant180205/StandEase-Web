@@ -3,7 +3,7 @@ import { getFirestore } from "firebase/firestore"
 import { getAuth } from "firebase/auth"
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAkVQ_pcgVVA_iAWqpaevWhvhWKz1BivgU",
+  apiKey: "firebase_api_key",
   authDomain: "standease-backend.firebaseapp.com",
   projectId: "standease-backend",
   storageBucket: "standease-backend.firebasestorage.app",
