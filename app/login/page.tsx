@@ -21,10 +21,12 @@ export default function LoginPage() {
   const [password, setPassword] = useState("")
   const [name, setName] = useState("")
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
+    setError(null)
 
     try {
       if (isSignUp) {
@@ -36,9 +38,28 @@ export default function LoginPage() {
       }
 
       router.push("/") // redirect after success
-    } catch (err) {
+    } catch (err: any) {
       console.error("Auth error:", err)
-      alert("Authentication failed. Check console.")
+
+      switch (err.code) {
+        case "auth/user-not-found":
+          setError("No account found with this email.")
+          break
+        case "auth/wrong-password":
+          setError("Incorrect password.")
+          break
+        case "auth/invalid-email":
+          setError("Invalid email address.")
+          break
+        case "auth/email-already-in-use":
+          setError("Email already registered.")
+          break
+        case "auth/weak-password":
+          setError("Password must be at least 6 characters.")
+          break
+        default:
+          setError("Authentication failed. Please try again.")
+      }
     } finally {
       setLoading(false)
     }
@@ -63,6 +84,12 @@ export default function LoginPage() {
             <h1 className="text-3xl font-bold text-gray-900 mb-6 uppercase text-center">
               {isSignUp ? "Sign Up" : "Login"}
             </h1>
+
+            {error && (
+              <div className="mb-4 rounded-lg border border-red-300 bg-red-50 px-4 py-3 text-sm font-medium text-red-700">
+                {error}
+              </div>
+            )}
 
             <form onSubmit={handleSubmit} className="space-y-4">
               {isSignUp && (
@@ -120,7 +147,7 @@ export default function LoginPage() {
 
               <motion.button
                 type="submit"
-                disabled={loading}
+                disabled={loading || !email || !password}
                 className="w-full py-4 bg-red-600 text-white font-bold rounded-lg hover:bg-red-700 transition-colors uppercase tracking-wide disabled:opacity-50"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
@@ -157,7 +184,10 @@ export default function LoginPage() {
 
             <div className="mt-6 text-center">
               <button
-                onClick={() => setIsSignUp(!isSignUp)}
+                onClick={() => {
+                  setIsSignUp(!isSignUp)
+                  setError(null)
+                }}
                 className="text-gray-600 hover:text-red-600 font-medium transition-colors"
               >
                 {isSignUp
