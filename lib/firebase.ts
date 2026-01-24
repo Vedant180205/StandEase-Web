@@ -3,12 +3,12 @@ import { getFirestore } from "firebase/firestore"
 import { getAuth } from "firebase/auth"
 
 const firebaseConfig = {
-  apiKey: "firebase_api_key",
-  authDomain: "standease-backend.firebaseapp.com",
-  projectId: "standease-backend",
-  storageBucket: "standease-backend.firebasestorage.app",
-  messagingSenderId: "658858685096",
-  appId: "1:658858685096:web:d5084070f80c4e0994c89d",
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY!,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN!,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID!,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET!,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID!,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID!,
 }
 
 export const app =
