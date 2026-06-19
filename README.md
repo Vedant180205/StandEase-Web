@@ -1,6 +1,6 @@
 <div align="center">
 
-![StandEase Banner](./public/images/office-insole-all-views.png)
+![StandEase Banner](./public/images/banner.png)
 
 <br/>
 
