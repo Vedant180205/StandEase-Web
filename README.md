@@ -1,6 +1,6 @@
 <div align="center">
 
-![StandEase Banner](./public/images/banner.png)
+![StandEase Banner](./public/images/standease-banner.png)
 
 <br/>
 
